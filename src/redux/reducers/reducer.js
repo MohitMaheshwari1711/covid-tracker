@@ -3,7 +3,7 @@ function reducer(state = {
         lat: 34.80746,
         long: -40.4796
     },
-    country: 'worldwide'
+    country: 'Worldwide'
 }, action) {
     switch (action.type) {
         case "location":

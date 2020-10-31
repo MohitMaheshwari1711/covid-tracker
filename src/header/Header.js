@@ -14,7 +14,7 @@ import { sortData } from '../util';
 function Header() {
 
     const [countries, setCountries] = useState([]);
-    const [country, setCountry] = useState('worldwide');
+    const [country, setCountry] = useState('Worldwide');
     const dispatch = useDispatch();
 
 
@@ -66,14 +66,14 @@ function Header() {
 
     const onCountryChange = async (event) => {
         const countryCode = event.target.value;
-        const url = countryCode === 'worldwide' ? 'https://disease.sh/v3/covid-19/all' : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+        const url = countryCode === 'Worldwide' ? 'https://disease.sh/v3/covid-19/all' : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
 
         await fetch(url).then(
             response => response.json()
         ).then(
             data => {
                 setCountry(countryCode);
-                if (countryCode === 'worldwide') {
+                if (countryCode === 'Worldwide') {
                     dispatch({
                         type: "location",
                         value: {
@@ -81,7 +81,8 @@ function Header() {
                             countryInfo: {
                                 lat: 34.80746,
                                 long: -40.4796
-                            }
+                            },
+                            country: 'Worldwide'
                         }
                     });
                 } else {
@@ -101,7 +102,7 @@ function Header() {
             <h1>COVID-19 TRACKER</h1>
             <FormControl className='app_dropdown'>
                 <Select variant='outlined' value={country} onChange={onCountryChange}>
-                    <MenuItem value='worldwide'>Worldwide</MenuItem>
+                    <MenuItem value='Worldwide'>Worldwide</MenuItem>
                     {
                         countries.map(
                             (country, index) => (

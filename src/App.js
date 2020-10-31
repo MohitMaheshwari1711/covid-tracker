@@ -30,8 +30,8 @@ function App() {
       <div className="app_left">
         <Header />
         <div className='app_stats'>
-          <InfoBox title='Coronavirus Cases' isOrange active={casesType === "cases"} onClick={e => setCasesType('cases')} cases={prettyStat(countryInfo.todayCases)} total={prettyStat(countryInfo.cases)} />
-          <InfoBox title='Recovered' isGreen active={casesType === "recovered"} onClick={e => setCasesType('recovered')} cases={prettyStat(countryInfo.todayRecovered)} total={prettyStat(countryInfo.recovered)} />
+          <InfoBox title='Coronavirus Cases' textColor='text-color-orange' isOrange active={casesType === "cases"} onClick={e => setCasesType('cases')} cases={prettyStat(countryInfo.todayCases)} total={prettyStat(countryInfo.cases)} />
+          <InfoBox title='Recovered' textColor='text-color-green' isGreen active={casesType === "recovered"} onClick={e => setCasesType('recovered')} cases={prettyStat(countryInfo.todayRecovered)} total={prettyStat(countryInfo.recovered)} />
           <InfoBox title='Deaths' isRed active={casesType === "deaths"} onClick={e => setCasesType('deaths')} cases={prettyStat(countryInfo.todayDeaths)} total={prettyStat(countryInfo.deaths)} />
         </div>
         <Map casesType={casesType} />
@@ -42,7 +42,7 @@ function App() {
           <CardContent>
             <h3>Live cases by country</h3>
             <Table />
-            <h3>Worldwide new {casesType}</h3>
+            <h3>{countryInfo.country} new {casesType}</h3>
             <Graph casesType={casesType} />
           </CardContent>
         </Card>

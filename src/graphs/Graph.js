@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 import numeral from "numeral";
 
 
@@ -67,6 +68,7 @@ const buildChartData = (data, casesType) => {
 
 function Graph({ casesType }) {
 
+  const countryDetails = useSelector(state => state);
   const [data, setData] = useState({});
   const [backgroundColor, changebackgroundColor] = useState('');
   const [borderColor, changeborderColor] = useState('');
@@ -85,25 +87,24 @@ function Graph({ casesType }) {
     }
 
     const fetchData = async () => {
-      await fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=120`)
+      const url = countryDetails.country === 'Worldwide' ? 'https://disease.sh/v3/covid-19/historical/all?lastdays=120' : `https://disease.sh/v3/covid-19/historical/${countryDetails.country}?lastdays=120`;
+      await fetch(url)
         .then((response) => {
           return response.json();
         })
         .then((data) => {
-          let chartData = buildChartData(data, casesType);
-          setData(chartData);
-          // if (data['timeline']) {
-          //   let chartData = buildChartData(data['timeline'], casesType);
-          //   setData(chartData);
-          // } else {
-          //   let chartData = buildChartData(data, casesType);
-          //   setData(chartData);
-          // }
-        });
+          if (data['timeline']) {
+            let chartData = buildChartData(data['timeline'], casesType);
+            setData(chartData);
+          } else {
+            let chartData = buildChartData(data, casesType);
+            setData(chartData);
+          }
+        }); 
     };
 
     fetchData();
-  }, [casesType]);
+  }, [casesType, countryDetails.country]);
 
   return (
     <div>

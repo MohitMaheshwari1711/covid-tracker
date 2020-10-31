@@ -137,6 +137,14 @@ table {
   border-color: rgb(251, 68, 67);
 }
 
+.text-color-orange {
+  color: rgb(251, 68, 67) !important;
+}
+
+.text-color-green {
+  color: rgb(125, 215, 29) !important;
+}
+
 .infoBox_cases_green {
   color: lightgreen !important;
 }

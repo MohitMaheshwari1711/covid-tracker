@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 
 
 
-function InfoBox({ title, cases, active, isOrange, isGreen, isRed, total, ...props }) {
+function InfoBox({ title, cases, textColor, active, isOrange, isGreen, isRed, total, ...props }) {
 
 
     return (
@@ -15,7 +15,7 @@ function InfoBox({ title, cases, active, isOrange, isGreen, isRed, total, ...pro
                 <Typography className='infoBox_title' color='textSecondary'>
                     {title}
                 </Typography>
-                <h2 className='infoBox_cases'>{cases}</h2>
+                <h2 className={`infoBox_cases ${textColor}`}>{cases}</h2>
                 <Typography className='infoBox_total' color='textSecondary'>
                     {total} Total
                 </Typography>
